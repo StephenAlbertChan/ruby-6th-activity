@@ -8,15 +8,17 @@ module Action
     end
 end
 
-class Pokemon 
-    def initialize(name,type,level)
+class Pokemon
+    def initialize(name)
         @name = name
-        @type = type
-        @level = level
     end
 
-    def type(type)
-        type.type
+    include Action
+end
+
+class Pokemon_type
+    def element_type(element)
+        element.element_type
     end
 end
 
@@ -25,23 +27,19 @@ class Pikachu < Pokemon
         puts "Pikachu used Volt tackle!"
     end
 
-    def type
-        puts "is an #{@type} type"
+    def element_type
+        puts "Pikachu is an electric type"
     end
-
-    include Action
 end
 
 class Charmander < Pokemon
     def attack
-        puts "Pikachu used Fire Blast!"
+        puts "Charmander used Fire Blast!"
     end
 
-    def type
-        puts "is a #{@type} type"
+    def element_type
+        puts "Charmander is a fire type"
     end
-
-    include Action
 end
 
 
@@ -50,11 +48,9 @@ class Squirtle < Pokemon
         puts "Squirtle used Hydro Pump!"
     end
 
-    def type
-        puts "is a #{@type} type"
+    def element_type
+        puts "Squirtle is a water type"
     end
-
-    include Action
 end
 
 
@@ -63,19 +59,37 @@ class Bulbasaur < Pokemon
         puts "Bulbasaur used Solarbeam!"
     end
 
-    def type
-        puts "is a #{@type} type"
+    def element_type
+        puts "Bulbasaur is a grass type"
     end
-
-    include Action
 end
 
-Pikachu = Pikachu.new("Pikachu", "Electric", 5)
-Charmander = Charmander.new("Charmander", "Fire", 5)
-Squirtle = Squirtle.new("Squirtle", "Water", 5)
-Bulbasaur = Bulbasaur.new("Bulbasaur", "Grass", 5)
+pikachuType = Pokemon_type.new
+charmanderType = Pokemon_type.new
+squirtleType = Pokemon_type.new
+bulbasaurType = Pokemon_type.new
 
-Pikachu.attack
-Charmander.run
-Squirtle.walk
-Bulbasaur.type
+pikachu = Pikachu.new("Pikachu")
+charmander = Charmander.new("Charmander")
+squirtle = Squirtle.new("Squirtle")
+bulbasaur = Bulbasaur.new("Bulbasaur")
+
+pikachu.walk
+pikachu.run
+pikachu.attack
+pikachuType.element_type(pikachu)
+puts("================================")
+charmander.attack
+charmander.walk
+charmander.run
+charmanderType.element_type(charmander)
+puts("================================")
+squirtle.attack
+squirtle.walk
+squirtle.run
+squirtleType.element_type(squirtle)
+puts("================================")
+bulbasaur.attack
+bulbasaur.walk
+bulbasaur.run
+bulbasaurType.element_type(bulbasaur)
